@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercadito Latino | Tienda & Taquería - Glasgow, KY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        /* Mejora para la galería en móviles */
+        .gallery-columns { column-count: 2; column-gap: 1rem; }
+        @media (min-width: 768px) { .gallery-columns { column-count: 3; } }
+        @media (min-width: 1024px) { .gallery-columns { column-count: 4; } }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900" x-data="{ mobileMenu: false }">
+
+    <nav class="fixed w-full z-50 glass shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0">
+                    <img class="h-14 md:h-16 w-auto" src="Mercaditologo.jpeg" alt="Mercadito Latino Logo">
+                </div>
+
+                <div class="hidden md:flex space-x-6 lg:space-x-8 font-bold items-center">
+                    <a href="#home" class="hover:text-red-600 transition">Inicio</a>
+                    <a href="#about" class="hover:text-red-600 transition">Nosotros</a>
+                    <a href="#gallery" class="hover:text-red-600 transition">Galería</a>
+                    <a href="#contact" class="hover:text-red-600 transition text-red-600">Contacto</a>
+                    <a href="English.html" class="flex items-center text-blue-600 hover:text-blue-800 transition">
+                        <i class="fas fa-globe mr-1"></i> English
+                    </a>
+                    <a href="https://wa.me/12706295470" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded-full flex items-center hover:bg-green-600 transition">
+                        <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+                    </a>
+                </div>
+
+                <div class="md:hidden flex items-center gap-4">
+                    <a href="English.html" class="text-sm font-bold text-blue-600">EN</a>
+                    <button @click="mobileMenu = !mobileMenu" class="text-gray-700 p-2 text-2xl outline-none">
+                        <i class="fas" :class="mobileMenu ? 'fa-times' : 'fa-bars'"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div x-show="mobileMenu" 
+             x-transition 
+             class="md:hidden bg-white border-t border-gray-100 p-4 space-y-4 shadow-xl">
+            <a href="#home" @click="mobileMenu = false" class="block font-bold py-2">Inicio</a>
+            <a href="#about" @click="mobileMenu = false" class="block font-bold py-2">Nosotros</a>
+            <a href="#gallery" @click="mobileMenu = false" class="block font-bold py-2">Galería</a>
+            <a href="#contact" @click="mobileMenu = false" class="block font-bold py-2">Contacto</a>
+            <a href="tel:2706295470" class="block font-bold text-red-600 italic underline">Llamar: (270) 629-5470</a>
+            <a href="English.html" class="block font-bold text-blue-600 italic">Switch to English</a>
+        </div>
+    </nav>
+
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden" 
+             x-data="{ active: 0, slides: ['Background5.jpeg', 'Background1.jpeg', 'Background2.jpeg', 'Background3.jpeg', 'Background4.jpeg','Background6.jpeg', 'Background7.jpeg', 'Background8.jpeg', 'Background9.jpeg', 'Background10.jpeg', 'Background11.jpeg', 'Background12.jpeg', 'Backgroud13.jpeg', 'Background14.jpeg'], init() { setInterval(() => { this.active = this.active === this.slides.length - 1 ? 0 : this.active + 1 }, 5000) } }">
+        
+        <template x-for="(slide, index) in slides" :key="index">
+            <div x-show="active === index" 
+                 x-transition:enter="transition ease-out duration-1000"
+                 x-transition:enter-start="opacity-0 scale-105"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 class="absolute inset-0 z-0">
+                <img :src="slide" class="w-full h-full object-cover">
+            </div>
+        </template>
+
+        <div class="absolute inset-0 bg-black/60 z-10"></div>
+
+        <div class="relative z-20 text-center px-6">
+            <h1 class="text-4xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tighter italic leading-none">
+                Mercadito <span class="text-yellow-400">Latino</span>
+            </h1>
+            <p class="mt-4 text-lg md:text-2xl text-gray-200 font-light max-w-2xl mx-auto">
+                Tienda y Taquería: Los productos latinos de mejor calidad en Glasgow, Kentucky.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#gallery" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-black text-lg transition shadow-xl text-center">
+                    SABOR AUTÉNTICO / VER MENÚ
+                </a>
+                <a href="tel:2706295470" class="w-full sm:w-auto bg-white hover:bg-gray-100 text-gray-900 px-8 py-4 rounded-full font-black text-lg transition shadow-xl text-center">
+                    <i class="fas fa-phone mr-2"></i> (270) 629-5470
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <span class="text-red-600 font-bold uppercase tracking-widest text-sm italic">Sobre Nosotros</span>
+            <h2 class="text-3xl md:text-5xl font-black mt-4 mb-8">Nos enorgullecemos de lo que hacemos.</h2>
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 text-left">
+                <p class="text-lg md:text-xl text-gray-600 leading-relaxed italic">
+                    Nuestro propósito es vender productos latinos de la mejor calidad en nuestra ciudad, <strong>Glasgow, Kentucky</strong>. Somos un puente entre culturas, brindando los sabores del hogar a nuestra comunidad.
+                </p>
+                <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+                    Desde ingredientes frescos hasta platillos preparados al momento, cada producto y plato en nuestra cocina es seleccionado con orgullo. Mercadito Latino es su casa.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-0 overflow-hidden">
+        <div class="bg-yellow-400 p-10 md:p-16 text-center flex flex-col justify-center items-center">
+            <h3 class="text-3xl md:text-4xl font-black mb-2 md:mb-4 uppercase italic">¡Miércoles de Tacos!</h3>
+            <p class="text-xl md:text-2xl font-bold">Tacos a $1.79 todo el día</p>
+        </div>
+        <div class="bg-red-600 p-10 md:p-16 text-center flex flex-col justify-center items-center text-white">
+            <h3 class="text-3xl md:text-4xl font-black mb-2 md:mb-4 uppercase italic">¡Jueves de Birria!</h3>
+            <p class="text-xl md:text-2xl font-bold">3 Tacos de Birria + Consomé: $9.99</p>
+        </div>
+    </div>
+
+    <section id="gallery" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-black mb-12 uppercase tracking-widest italic underline decoration-yellow-400">Fresco de Nuestra Cocina y Tienda</h2>
+            
+            <div class="gallery-columns space-y-4">
+                 <img src="Special.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="foto.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="foto1.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="foto.png" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="foto2.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="foto3.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="foto4.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="foto5.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="foto6.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="foto7.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="foto8.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background8.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background1.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background2.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background3.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background4.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background5.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background6.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background7.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background9.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background10.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background11.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background12.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background13.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <img src="Background14.jpeg" class="w-full rounded-xl shadow-md hover:scale-[1.02] transition duration-300 cursor-pointer">
+          </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-gray-900 text-white py-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
+            <div class="space-y-8">
+                <h2 class="text-4xl font-black uppercase italic">Visítanos Hoy</h2>
+                <div class="space-y-6 text-lg md:text-xl">
+                    <a href="https://www.google.com/maps/search/?api=1&query=222+Shane+Drive+Glasgow+KY+42141" 
+                       target="_blank" class="flex items-start hover:text-red-400 transition">
+                        <i class="fas fa-map-marker-alt text-red-500 mt-1 mr-4"></i> 
+                        <span>222 Shane Drive, Glasgow, KY 42141</span>
+                    </a>
+
+                    <div class="flex flex-col space-y-4">
+                        <a href="tel:2706295470" class="flex items-center hover:text-red-400 transition">
+                            <i class="fas fa-phone text-red-500 mr-4"></i> (270) 629-5470
+                        </a>
+                        <a href="sms:2706295470" class="flex items-center text-blue-400 hover:text-blue-300 transition text-sm ml-10">
+                            <i class="fas fa-comment-dots mr-2"></i> Enviar mensaje de texto
+                        </a>
+                    </div>
+
+                    <a href="https://wa.me/12706295470" target="_blank" class="flex items-center font-bold text-green-400 hover:text-green-300 transition">
+                        <i class="fab fa-whatsapp mr-4 text-2xl"></i> Chatear por WhatsApp
+                    </a>
+
+                    <div class="pt-6 border-t border-gray-800">
+                        <p class="font-bold text-yellow-400 uppercase tracking-widest italic mb-2">Horario</p>
+                        <p>Lunes - Domingo</p>
+                        <p class="text-2xl font-black">ABIERTO HASTA LAS 9:00 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="h-80 md:h-full min-h-[350px] rounded-2xl overflow-hidden shadow-2xl relative border-4 border-white">
+                <iframe 
+                    class="w-full h-full grayscale contrast-125" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3183.181232345678!2d-85.9324567!3d37.0004567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8866380696700000%3A0x0!2zMjIyIFNoYW5lIERyLCBHbGFzZ293LCBLWSA0MjE0MSwgVUVB!5e0!3m2!1ses!2s!4v1700000000000" 
+                    style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full text-red-600 text-5xl animate-bounce pointer-events-none">
+                    <i class="fas fa-location-pin"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-10 text-center text-gray-500 text-xs md:text-sm border-t border-gray-900 px-4">
+        <p>© 2026 Mercadito Latino Tienda & Taquería. Orgullosamente sirviendo a Glasgow, KY.</p>
+        <p class="mt-2 uppercase tracking-widest">Desarrollado por PPM Digital</p>
+    </footer>
+
+</body>
+</html>
